@@ -12,7 +12,7 @@ public class RocketEnergySystem : MonoBehaviour
     private float curFuel;
     private readonly float FUELPERSHOOT = 10f;
     private readonly float FuelCharge = 1f;
-    
+
     void Awake()
     {
         curFuel = maxFuel;
@@ -22,29 +22,24 @@ public class RocketEnergySystem : MonoBehaviour
     {
         EnergyChargeSystem();
         FuelbarUpdate();
+        activateButtonSystem();
     }
     private void EnergyPerShoot()
     {
         if (curFuel >= FUELPERSHOOT)
         {
-            _button.interactable = true;
-            curFuel -= FUELPERSHOOT; 
+            curFuel -= FUELPERSHOOT;
         }
-        else
-        { 
-            _button.interactable = false;
-        }
-        
     }
 
     private void EnergyChargeSystem()
     {
-        if( curFuel < maxFuel )
+        if (curFuel < maxFuel)
         {
             curFuel += FuelCharge * Time.deltaTime;
-            if( curFuel > maxFuel )
+            if (curFuel > maxFuel)
             {
-                curFuel = maxFuel ;
+                curFuel = maxFuel;
             }
         }
         Debug.Log("Fuel after charge: " + curFuel);
@@ -53,4 +48,17 @@ public class RocketEnergySystem : MonoBehaviour
     {
         fuelImage.fillAmount = curFuel / maxFuel;
     }
+
+    private void activateButtonSystem()
+    {
+        if (curFuel >= FUELPERSHOOT)
+        {
+            _button.interactable = true;
+        }
+        else
+        {
+            _button.interactable = false;
+        }
+    }
 }
+
